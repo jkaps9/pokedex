@@ -7,6 +7,7 @@ export async function commandMap(state: State) {
     data.results.forEach((loc: Location) => {
       console.log(loc.name);
     });
+    state.readlineInterface.prompt();
   } catch (error) {
     if (error instanceof Error) {
       console.error(error.message);
