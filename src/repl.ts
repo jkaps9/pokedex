@@ -1,5 +1,6 @@
 import { createInterface } from "node:readline";
 import type { CLICommand } from "./CLICommand.js";
+import { commandExit } from "./command_exit.js";
 
 export function cleanInput(input: string): string[] {
   // logic goes here
@@ -21,6 +22,16 @@ export function startREPL() {
 
   rl.on("line", (line) => {
     if (line !== "") {
+      const command = getCommands()[cleanInput(line)[0]];
+      if (command) {
+        try {
+          command.callback(getCommands());
+        } catch (e) {
+          console.log(e);
+        }
+      } else {
+        console.log("Unkown command");
+      }
     }
     rl.prompt();
   });
