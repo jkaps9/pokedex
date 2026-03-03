@@ -9,7 +9,7 @@ describe.each([
   // TODO: more test cases here
 ])("cleanInput($input)", ({ input, expected }) => {
   test(`Expected: ${expected}`, () => {
-    // TODO: call cleanInput with the input here
+    const actual = cleanInput(input);
 
     // The `expect` and `toHaveLength` functions are from vitest
     // they will fail the test if the condition is not met
