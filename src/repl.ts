@@ -19,7 +19,9 @@ export function startREPL() {
   rl.prompt();
 
   rl.on("line", (line) => {
-    console.log(cleanInput(line)[0]);
+    if (line !== "") {
+      console.log(`Your command was: ${cleanInput(line)[0]}`);
+    }
     rl.prompt();
   });
 }
