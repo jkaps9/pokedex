@@ -1,6 +1,7 @@
-import type { CLICommand } from "./CLICommand.js";
+import type { State } from "./state.js";
 
-export function commandExit(commands: Record<string, CLICommand>) {
+export function commandExit(state: State) {
   console.log("Closing the Pokedex... Goodbye!");
+  state.readlineInterface.close();
   process.exit(0);
 }
