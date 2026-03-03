@@ -20,8 +20,12 @@ export function startREPL() {
 
   rl.on("line", (line) => {
     if (line !== "") {
-      console.log(`Your command was: ${cleanInput(line)[0]}`);
     }
     rl.prompt();
   });
+}
+
+export function commandExit() {
+  console.log("Closing the Pokedex... Goodbye!");
+  process.exit(0);
 }
