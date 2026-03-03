@@ -1,3 +1,5 @@
+import { createInterface } from "node:readline";
+
 export function cleanInput(input: string): string[] {
   // logic goes here
   //   The purpose of this function will be to split the user's input into "words" based on whitespace. It should also lowercase the input and trim any leading or trailing whitespace. For example:
@@ -8,10 +10,16 @@ export function cleanInput(input: string): string[] {
 }
 
 export function startREPL() {
-  const { createInterface } = require("node:readline");
   const rl = createInterface({
     input: process.stdin,
     output: process.stdout,
     prompt: "Pokedex > ",
+  });
+
+  rl.prompt();
+
+  rl.on("line", (line) => {
+    console.log(cleanInput(line)[0]);
+    rl.prompt();
   });
 }
