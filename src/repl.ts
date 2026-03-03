@@ -1,5 +1,5 @@
 import { createInterface } from "node:readline";
-import type { CLICommand } from "./CLICommand.js";
+import type { CLICommand } from "./state.js";
 import { commandExit } from "./command_exit.js";
 import { commandHelp } from "./command_help.js";
 
