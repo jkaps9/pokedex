@@ -1,6 +1,7 @@
 import { createInterface, type Interface } from "readline";
 import { commandExit } from "./command_exit.js";
 import { commandHelp } from "./command_help.js";
+import { commandMap } from "./command_map.js";
 import { PokeAPI } from "./pokeapi.js";
 
 export type CLICommand = {
@@ -42,6 +43,11 @@ export function getCommands(): Record<string, CLICommand> {
       name: "help",
       description: "Displays a help message",
       callback: commandHelp,
+    },
+    map: {
+      name: "map",
+      description: "Displays location areas in the Pokemon world",
+      callback: commandMap,
     },
     // can add more commands here
   };
