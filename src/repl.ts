@@ -1,7 +1,4 @@
-import { createInterface } from "node:readline";
-import type { CLICommand } from "./state.js";
-import { commandExit } from "./command_exit.js";
-import { commandHelp } from "./command_help.js";
+import { type State } from "./state.js";
 
 export function cleanInput(input: string): string[] {
   // logic goes here
@@ -12,21 +9,16 @@ export function cleanInput(input: string): string[] {
   return input.trim().toLowerCase().split(/\s+/);
 }
 
-export function startREPL() {
-  const rl = createInterface({
-    input: process.stdin,
-    output: process.stdout,
-    prompt: "Pokedex > ",
-  });
-
+export function startREPL(state: State) {
+  const rl = state.readlineInterface;
   rl.prompt();
 
   rl.on("line", (line) => {
     if (line !== "") {
-      const command = getCommands()[cleanInput(line)[0]];
+      const command = state.commandRegistry[cleanInput(line)[0]];
       if (command) {
         try {
-          command.callback(getCommands());
+          command.callback(state);
         } catch (e) {
           console.log(e);
         }
@@ -36,22 +28,4 @@ export function startREPL() {
     }
     rl.prompt();
   });
-}
-
-// REGISTRY
-
-export function getCommands(): Record<string, CLICommand> {
-  return {
-    exit: {
-      name: "exit",
-      description: "Exits the pokedex",
-      callback: commandExit,
-    },
-    help: {
-      name: "help",
-      description: "Displays a help message",
-      callback: commandHelp,
-    },
-    // can add more commands here
-  };
 }
