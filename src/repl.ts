@@ -6,3 +6,12 @@ export function cleanInput(input: string): string[] {
 
   return input.trim().toLowerCase().split(/\s+/);
 }
+
+export function startREPL() {
+  const { createInterface } = require("node:readline");
+  const rl = createInterface({
+    input: process.stdin,
+    output: process.stdout,
+    prompt: "Pokedex > ",
+  });
+}
