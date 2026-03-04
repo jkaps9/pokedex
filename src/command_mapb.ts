@@ -10,7 +10,13 @@ export async function commandMapB(state: State) {
       data.results.forEach((loc: Location) => {
         console.log(loc.name);
       });
-      state.readlineInterface.prompt();
+      if (data.next) {
+        state.nextLocationsURL = data.next;
+      }
+      if(data.previous) {
+        state.prevLocationsURL = data.previous;
+      }
+        state.readlineInterface.prompt();
     } catch (error) {
       if (error instanceof Error) {
         console.error(error.message);
