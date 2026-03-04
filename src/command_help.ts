@@ -7,4 +7,6 @@ export async function commandHelp(state: State) {
     .forEach((command) => {
       console.log(`${command.name}: ${command.description}`);
     });
+
+  state.readlineInterface.prompt();
 }
