@@ -12,9 +12,13 @@ export async function commandMapB(state: State) {
       });
       if (data.next) {
         state.nextLocationsURL = data.next;
+      } else {
+        state.nextLocationsURL = "";
       }
       if(data.previous) {
         state.prevLocationsURL = data.previous;
+      } else {
+	state.prevLocationsURL = "";
       }
         state.readlineInterface.prompt();
     } catch (error) {

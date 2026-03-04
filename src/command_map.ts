@@ -11,11 +11,14 @@ export async function commandMap(state: State) {
     });
     console.log(data.next);
     if (data.next) {
-      state.nextLocationsURL = data.next;
-    }
-    if(data.previous) {
-      state.prevLocationsURL = data.previous;
-    }
+        state.nextLocationsURL = data.next;                                       } else {
+        state.nextLocationsURL = "";
+      }
+      if(data.previous) {
+        state.prevLocationsURL = data.previous;
+      } else {
+        state.prevLocationsURL = "";
+      }
     state.readlineInterface.prompt();
   } catch (error) {
     if (error instanceof Error) {
