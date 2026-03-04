@@ -10,6 +10,7 @@ export class Cache {
 
   constructor(interval: number) {
     this.#interval = interval;
+    this.#startReapLoop();
   }
 
   add(key: string, val: T){
@@ -29,8 +30,16 @@ export class Cache {
       if(value.createdAt<(Date.now() - this.#interval)){
 	this.remove(key);
     }
+    }
 		       );
   }
 
+  #startReapLoop() {
+    this.#reapIntervalId = setInterval(this.#reap(), this.#interval);
+  }
 
+  stopReapLoop()  {
+    clearInterval(this.#reapIntervalId);
+    this.#reapIntervalId = undefined;
+  }
 }
