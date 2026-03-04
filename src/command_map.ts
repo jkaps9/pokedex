@@ -13,6 +13,9 @@ export async function commandMap(state: State) {
     if (data.next) {
       state.nextLocationsURL = data.next;
     }
+    if(data.previous) {
+      state.prevLocationsURL = data.previous;
+    }
     state.readlineInterface.prompt();
   } catch (error) {
     if (error instanceof Error) {
