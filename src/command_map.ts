@@ -19,10 +19,10 @@ export async function commandMap(state: State) {
       } else {
         state.prevLocationsURL = "";
       }
-    state.readlineInterface.prompt();
   } catch (error) {
     if (error instanceof Error) {
       console.error(error.message);
     }
   }
+  state.readlineInterface.prompt();
 }
