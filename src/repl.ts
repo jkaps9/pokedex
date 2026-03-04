@@ -26,6 +26,5 @@ export function startREPL(state: State) {
         console.log("Unkown command");
       }
     }
-    rl.prompt();
   });
 }
