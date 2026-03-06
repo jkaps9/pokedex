@@ -12,20 +12,21 @@ export class PokeAPI {
   async fetchLocations(pageURL?: string): Promise<ShallowLocations> {
     
     const url = pageURL ? pageURL : PokeAPI.baseURL + "/location-area/";
+    
+    if (this.cache.has(url)) {
+      console.log("using cached response");
+      return this.cache.get<ShallowLocations>(url)!;
+    }
 
-    const response = this.cache.has(url) ? this.cache.get(url) : await fetch(url);
+    const response = await fetch(url);
 
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
 
-    if(!this.cache.has(url)){
-      this.cache.add(url, response);
-    } else {
-      console.log("using cached response");
-    }
-
-    return response.json() as Promise<ShallowLocations>;
+    const data = await response.json() as ShallowLocations;
+    this.cache.add(url, data);
+    return data;
   }
 
   async fetchLocation(locationName: string): Promise<void> {
