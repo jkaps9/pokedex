@@ -13,12 +13,12 @@ export class Cache {
     this.#startReapLoop();
   }
 
-  add(key: string, val: T){
-    this.#cache.set(key, val);
+  add<T>(key: string, val: T) {
+    this.#cache.set(key, { createdAt: Date.now(), val });
   }
 
-  get(key: string): CacheEntry<any>{
-    return this.#cache.get(key);
+  get<T>(key: string): T | undefined {
+    return this.#cache.get(key)?.val as T;
   }
 
   remove(key: string){
@@ -35,8 +35,8 @@ export class Cache {
   }
 
   #startReapLoop() {
-    this.#reapIntervalId = setInterval(this.#reap(), this.#interval);
-  }
+    this.#reapIntervalId = setInterval(this.#reap().bind(this), this.#interval);
+     }
 
   stopReapLoop()  {
     clearInterval(this.#reapIntervalId);
