@@ -16,9 +16,15 @@ export class PokeAPI {
     return response.json() as Promise<ShallowLocations>;
   }
 
-  async fetchLocation(locationName: string): Promise<void> {
+  async fetchLocation(locationName: string): Promise<Location> {
     // Promise<Location>
-    // implement this
+    const url = PokeAPI.baseURL + `/location-area/${locationName}`;
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }                                                                       
+    return response.json() as Promise<Location>;
   }
 }
 
