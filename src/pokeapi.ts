@@ -3,14 +3,14 @@ import { Cache } from "./pokecache.js";
 export class PokeAPI {
   private static readonly baseURL = "https://pokeapi.co/api/v2";
 
-  private cache: any;
+  private cache = new Cache(300000); // 5 min cache (300k ms)
 
   constructor() {
-    this.cache = new Cache(300000); // 5 min cache (300k ms)
+    
   }
 
   async fetchLocations(pageURL?: string): Promise<ShallowLocations> {
-    
+    this.cache.printKeys();
     const url = pageURL ? pageURL : PokeAPI.baseURL + "/location-area/";
     
     if (this.cache.has(url)) {
