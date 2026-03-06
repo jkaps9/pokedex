@@ -18,7 +18,7 @@ export function startREPL(state: State) {
       const command = state.commandRegistry[cleanInput(line)[0]];
       if (command) {
         try {
-          command.callback(state);
+          command.callback(state, cleanInput(line)[1]);
         } catch (e) {
           console.log(e);
         }
