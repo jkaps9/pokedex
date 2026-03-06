@@ -11,8 +11,7 @@ export class PokeAPI {
 
   async fetchLocations(pageURL?: string): Promise<ShallowLocations> {
     this.cache.printKeys();
-    const url = pageURL ? pageURL : PokeAPI.baseURL + "/location-area/";
-    
+    const url = pageURL ? pageURL : PokeAPI.baseURL + "/location-area/?offset=0&limit=20";
     if (this.cache.has(url)) {
       console.log("using cached response");
       return this.cache.get(url)!;
