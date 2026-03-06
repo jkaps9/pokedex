@@ -15,7 +15,7 @@ export class PokeAPI {
     
     if (this.cache.has(url)) {
       console.log("using cached response");
-      return this.cache.get<ShallowLocations>(url)!;
+      return this.cache.get(url)!;
     }
 
     const response = await fetch(url);
