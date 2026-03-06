@@ -21,6 +21,10 @@ export class Cache<T> {
     return this.#cache.get(key)?.val as T;
   }
 
+  has(key: string): boolean {
+    return this.#cache.has(key);
+  }
+
   remove(key: string){
     this.#cache.delete(key);
   } 
