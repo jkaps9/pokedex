@@ -23,7 +23,7 @@ export function startREPL(state: State) {
           console.log(e);
         }
       } else {
-        console.log("Unkown command");
+        console.log("Unknown command");
       }
     }
   });
