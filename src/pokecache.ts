@@ -46,4 +46,10 @@ export class Cache<T> {
     clearInterval(this.#reapIntervalId);
     this.#reapIntervalId = undefined;
   }
+
+  printKeys(){
+    for (const key of this.#cache.keys()) {
+      console.log(key);
+    }
+  }
 }
