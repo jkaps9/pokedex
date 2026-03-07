@@ -8,10 +8,10 @@ export class PokeAPI {
   constructor() {}
 
   async fetchLocations(pageURL?: string): Promise<ShallowLocations> {
-    this.cache.printKeys();
     const url = pageURL
       ? pageURL
       : PokeAPI.baseURL + "/location-area/?offset=0&limit=20";
+
     if (this.cache.has(url)) {
       console.log("using cached response");
       return this.cache.get(url)!;
@@ -31,12 +31,21 @@ export class PokeAPI {
   async fetchLocation(locationName: string): Promise<Location> {
     // Promise<Location>
     const url = PokeAPI.baseURL + `/location-area/${locationName}`;
+
+    if (this.cache.has(url)) {
+      console.log("using cached response");
+      return this.cache.get(url)!;
+    }
+
     const response = await fetch(url);
 
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
-    }                                                                       
-    return response.json() as Promise<Location>;
+    }
+
+    const data = (await response.json()) as Promise<Location>;
+    this.cache.add(url, data);
+    return data;
   }
 }
 
@@ -54,6 +63,8 @@ export type Location = {
 };
 
 export type Pokemon = {
-  name: string;
-  url: string;
-}
+  pokemon: {
+    name: string;
+    url: string;
+  };
+};
