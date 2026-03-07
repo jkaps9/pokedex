@@ -5,13 +5,13 @@ export class PokeAPI {
 
   private cache = new Cache(300000); // 5 min cache (300k ms)
 
-  constructor() {
-    
-  }
+  constructor() {}
 
   async fetchLocations(pageURL?: string): Promise<ShallowLocations> {
     this.cache.printKeys();
-    const url = pageURL ? pageURL : PokeAPI.baseURL + "/location-area/?offset=0&limit=20";
+    const url = pageURL
+      ? pageURL
+      : PokeAPI.baseURL + "/location-area/?offset=0&limit=20";
     if (this.cache.has(url)) {
       console.log("using cached response");
       return this.cache.get(url)!;
@@ -23,7 +23,7 @@ export class PokeAPI {
       throw new Error(`Response status: ${response.status}`);
     }
 
-    const data = await response.json() as ShallowLocations;
+    const data = (await response.json()) as ShallowLocations;
     this.cache.add(url, data);
     return data;
   }
