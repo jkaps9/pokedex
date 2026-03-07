@@ -5,7 +5,7 @@ export async function commandExplore(state: State, locationName: string) {
   try {
     const data = await state.pokeAPI.fetchLocation(locationName);
     data.pokemon_encounters.forEach((loc: Location) => {
-      console.log(loc.name);
+      console.log(loc);
     });
   } catch (error) {
     if (error instanceof Error) {
