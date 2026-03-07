@@ -1,7 +1,7 @@
 export type CacheEntry<T> = {
-  createdAt: number,
-  val: T,
-}
+  createdAt: number;
+  val: T;
+};
 
 export class Cache<T> {
   #cache = new Map<string, CacheEntry<any>>();
@@ -25,29 +25,28 @@ export class Cache<T> {
     return this.#cache.has(key);
   }
 
-  remove(key: string){
+  remove(key: string) {
     this.#cache.delete(key);
-  } 
+  }
 
   #reap() {
     this.#cache.forEach((value, key) => {
-      if(value.createdAt<(Date.now() - this.#interval)){
-	this.remove(key);
-    }
-    }
-		       );
+      if (value.createdAt < Date.now() - this.#interval) {
+        this.remove(key);
+      }
+    });
   }
 
   #startReapLoop() {
     this.#reapIntervalId = setInterval(this.#reap.bind(this), this.#interval);
-     }
+  }
 
-  stopReapLoop()  {
+  stopReapLoop() {
     clearInterval(this.#reapIntervalId);
     this.#reapIntervalId = undefined;
   }
 
-  printKeys(){
+  printKeys() {
     for (const key of this.#cache.keys()) {
       console.log(key);
     }
