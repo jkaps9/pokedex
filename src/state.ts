@@ -6,6 +6,7 @@ import { commandMapB } from "./command_mapb.js";
 import { commandExplore } from "./command_explore.js";
 import { commandCatch } from "./command_catch.js";
 import { PokeAPI } from "./pokeapi.js";
+import type { Pokemon } from "./pokeapi.js";
 
 export type CLICommand = {
   name: string;
@@ -19,6 +20,7 @@ export type State = {
   pokeAPI: PokeAPI;
   nextLocationsURL: string;
   prevLocationsURL: string;
+  caughtPokemon: Map<string, Pokemon>;
 };
 
 export function initState(): State {
@@ -34,6 +36,7 @@ export function initState(): State {
     pokeAPI: new PokeAPI(),
     nextLocationsURL: "",
     prevLocationsURL: "",
+    caughtPokemon: new Map<string, Pokemon>(),
   };
 
   return state;

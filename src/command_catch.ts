@@ -1,5 +1,5 @@
 import type { State } from "./state.js";
-import type { Location } from "./pokeapi.js";
+import type { Pokemon } from "./pokeapi.js";
 
 export async function commandCatch(state: State, pokemonName: string) {
   try {
@@ -7,6 +7,10 @@ export async function commandCatch(state: State, pokemonName: string) {
     console.log(`Throwing a Pokeball at ${pokemonName}...`);
     if (calculateChance(data.base_experience) >= 0.5) {
       console.log(`${pokemonName} was caught!`);
+      state.caughtPokemon.set(data.name, data);
+      console.log(
+        `Number of Pokemon caught: ${state.caughtPokemon.keys().toArray().length}`,
+      );
     } else {
       console.log(`${pokemonName} escaped!`);
     }
