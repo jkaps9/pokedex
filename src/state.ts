@@ -75,6 +75,12 @@ export function getCommands(): Record<string, CLICommand> {
       description: "Attempt to catch a Pokemon using catch <pokemon_name>",
       callback: commandCatch,
     },
+    inspect: {
+      name: "inspect",
+      description:
+        "See details about caught Pokemon using inspect <pokemon_name>",
+      callback: commandInspect,
+    },
 
     // can add more commands here
   };
