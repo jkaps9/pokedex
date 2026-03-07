@@ -8,6 +8,7 @@ export async function commandCatch(state: State, pokemonName: string) {
     if (calculateChance(data.base_experience) >= 0.5) {
       console.log(`${pokemonName} was caught!`);
       state.caughtPokemon.set(data.name, data);
+      console.log("You may now inspect it with the inspect command.");
     } else {
       console.log(`${pokemonName} escaped!`);
     }
