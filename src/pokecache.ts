@@ -31,7 +31,8 @@ export class Cache<T> {
 
   #reap() {
     this.#cache.forEach((value, key) => {
-      if (value.createdAt < Date.now() - this.#interval) {
+      const cutoff = Date.now() - this.#interval;
+      if (value.createdAt < cutoff) {
         this.remove(key);
       }
     });
